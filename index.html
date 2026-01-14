@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fresarte – Página Fresa Pastel</title>
+
+<style>
+:root{
+    --fresa:#f06a9b;
+    --rosita:#ffd7e5;
+    --rosita-clara:#fff6fa;
+    --rosita-suave:#ffeef5;
+    --texto:#573542;
+    --radius:14px;
+    --shadow:0 6px 18px rgba(255,120,160,0.15);
+    --hover:rgba(255,160,200,0.20);
+    --white:#fff;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Nunito", sans-serif;}
+body{
+    background:linear-gradient(180deg,var(--rosita-clara),var(--white));
+    color:var(--texto);
+    min-height:100vh;
+}
+
+/* --- HEADER --- */
+.fresarte-header{
+    background:#fff;
+    padding:12px 0;
+    position:sticky;
+    top:0;
+    z-index:999;
+    box-shadow:0 0 18px rgba(0,0,0,0.2);
+}
+.fresarte-container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.fresarte-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    cursor:pointer;
+}
+.logo-redondo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e63946;
+}
+
+/* --- NAV --- */
+.fresarte-nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+.fresarte-nav a{
+    text-decoration:none;
+    color:#000;
+    font-weight:600;
+    padding:8px 12px;
+    position:relative;
+    transition:.25s;
+}
+.fresarte-nav a::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:0%;
+    height:3px;
+    background:#e63946;
+    border-radius:10px;
+    transition:all .3s ease;
+}
+.fresarte-nav a:hover::after{
+    width:100%;
+    left:0;
+}
+.fresarte-nav a.active{
+    background:#f5d5e0;
+    color:#e63946;
+    font-weight:bold;
+    border-radius:0; /* sin bordes redondos */
+}
+
+/* --- MENÚ MÓVIL --- */
+.fresarte-burger{
+    display:none;
+    background:none;
+    border:0;
+    font-size:28px;
+    color:#e63946;
+    cursor:pointer;
+}
+@media(max-width:900px){
+    .fresarte-burger{
+        display:block;
+    }
+    .fresarte-nav{
+        position:absolute;
+        right:0;
+        top:70px;
+        width:75%;
+        background:white;
+        padding:20px;
+        border-radius:0 0 0 18px;
+        display:none;
+        flex-direction:column;
+        box-shadow:0 0 18px rgba(0,0,0,0.2);
+        animation:menuSlide .35s ease-out;
+    }
+    @keyframes menuSlide{
+        from{opacity:0;transform:translateY(-10px);}
+        to{opacity:1;transform:translateY(0);}
+    }
+    .fresarte-nav.open{display:block;}
+    .fresarte-nav ul{flex-direction:column;}
+}
+
+/* --- CARRUSEL LENTO --- */
+.carousel{
+    width:90%;
+    max-width:1200px;
+    height:400px;
+    margin:40px auto;
+    overflow:hidden;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+.carousel-track{
+    display:flex;
+    width:400%;
+    height:100%;
+    animation:slide 30s infinite linear; /* animación lenta y continua */
+}
+.carousel-track img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+@keyframes slide{
+    0%   { transform:translateX(0); }
+    25%  { transform:translateX(-100%); }
+    50%  { transform:translateX(-200%); }
+    75%  { transform:translateX(-300%); }
+    100% { transform:translateX(-400%); } /* al final vuelve a empezar */
+}
+
+/* HERO TEXT */
+.hero-text{
+    text-align:center;
+    margin-top:20px;
+}
+.hero-text h2{
+    font-size:32px;
+    font-family:"Playfair Display",serif;
+    margin-bottom:15px;
+}
+.btn-fresa{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    background:linear-gradient(90deg,var(--fresa),var(--rosita));
+    color:white;
+    border-radius:var(--radius);
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:15px;
+    background:var(--texto);
+    color:var(--white);
+    margin-top:50px;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="fresarte-header">
+    <div class="fresarte-container">
+        <a class="fresarte-logo">
+            <img src="logo.jpg" alt="Logo Fresarte" class="logo-redondo">
+        </a>
+
+        <button class="fresarte-burger" id="fresaBurger">☰</button>
+
+        <nav class="fresarte-nav" id="fresaNav">
+            <ul>
+                <li><a href="#inicio" class="active">Inicio</a></li>
+                <li><a href="#quienes">Quienes somos</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#sucursales">Sucursales</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#blog">Blog</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- CARRUSEL -->
+<section class="carousel">
+    <div class="carousel-track">
+        <img src="fresarte1.jpeg" alt="Fresas con crema 1">
+        <img src="fresarte2.jpeg" alt="Fresas con crema 2">
+        <img src="fresarte3.jpeg" alt="Fresas con crema 3">
+        <img src="fresarte4.jpeg" alt="Fresas con crema 4">
+         <img src="fresa1.jpg" alt="Fresas con crema 5">
+        <img src="fresa2.jpg" alt="Fresas con crema 6">
+        <img src="fresa3.jpg" alt="Fresas con crema 7">
+        <img src="fresa4.jpg" alt="Fresas con crema 8">
+    </div>
+</section>
+
+<!-- HERO -->
+<div class="hero-text" id="inicio">
+    <h2>Bienvenido a Fresarte 🍓</h2>
+    <a class="btn-fresa" href="#productos">Ver nuestro menú</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2025 FRESARTE. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+// MENÚ MÓVIL
+const burger = document.getElementById("fresaBurger");
+const nav = document.getElementById("fresaNav");
+burger.addEventListener("click", ()=>{ nav.classList.toggle("open"); });
+</script>
+
+</body>
+</html>
+
